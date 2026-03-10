@@ -108,7 +108,6 @@ button {
 
 select,
 input[type="number"] {
-  width: 100%;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #8f6b3f;
@@ -120,7 +119,6 @@ input[type="range"] {
 }
 
 button {
-  border: 1px solid #8f6b3f;
   background: #f8e8c8;
   color: var(--ink);
   border-radius: 8px;
@@ -169,6 +167,7 @@ button.danger {
 
 .rollHeader,
 .roll {
+  width: max-content;
   min-width: 760px;
 }
 
@@ -182,6 +181,34 @@ button.danger {
   text-align: center;
   font-size: 0.72rem;
   color: #5a3f24;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: ew-resize;
+  padding: 2px 0;
+  border-right: 1px dashed rgba(98, 62, 28, 0.45);
+}
+
+.rollHeader .tick.beatEnd {
+  border-right: 1.5px solid rgba(74, 46, 20, 0.78);
+}
+
+.rollHeader .tick.selected {
+  background: rgba(184, 77, 37, 0.35);
+  box-shadow: inset 0 0 0 1px rgba(88, 31, 9, 0.7);
+}
+
+.rollHeader .tick.measureEnd {
+  border-right: 2px solid rgba(58, 34, 14, 0.95);
+}
+
+.rangeMenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rangeMenu.hidden {
+  display: none;
 }
 
 .roll {
@@ -217,8 +244,12 @@ button.danger {
   position: relative;
 }
 
-.cell:nth-child(4n + 2) {
-  border-right-color: rgba(58, 34, 14, 0.9);
+.cell.beatEnd {
+  border-right: 1.5px solid rgba(74, 46, 20, 0.78);
+}
+
+.cell.measureEnd {
+  border-right: 2px solid rgba(58, 34, 14, 0.95);
 }
 
 .cell:hover {
