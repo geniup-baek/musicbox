@@ -1,0 +1,269 @@
+:root {
+  --bg: #f2e6cc;
+  --paper: #d5b07a;
+  --paper-dark: #b5884f;
+  --ink: #352519;
+  --accent: #b84d25;
+  --accent-2: #2f6f4f;
+  --danger: #a12f2f;
+  --grid-line: #7f5a2f;
+  --hole: #2b1b10;
+  --shadow: rgba(40, 22, 8, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 15%, #f9f2df 0%, transparent 45%),
+    radial-gradient(circle at 92% 82%, #e8d2ab 0%, transparent 40%),
+    linear-gradient(150deg, #f3e5c4, #e0bd87);
+  min-height: 100vh;
+}
+
+.topbar {
+  padding: 20px 16px 8px;
+  text-align: center;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-family: "Nanum Myeongjo", "Times New Roman", serif;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  opacity: 0.8;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 8px 16px 12px;
+}
+
+.tab {
+  border: 2px solid var(--paper-dark);
+  background: #f8e8c8;
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: #8a3719;
+}
+
+main {
+  padding: 0 12px 14px;
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.24s ease;
+}
+
+.page.active {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 12px;
+}
+
+.panel {
+  background: rgba(255, 248, 231, 0.84);
+  border: 1px solid rgba(113, 75, 36, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px var(--shadow);
+  padding: 12px;
+}
+
+.controls {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+label {
+  display: grid;
+  gap: 4px;
+  font-size: 0.95rem;
+}
+
+select,
+input,
+button {
+  font: inherit;
+}
+
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #8f6b3f;
+  background: #fffef6;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+button {
+  border: 1px solid #8f6b3f;
+  background: #f8e8c8;
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  filter: brightness(0.98);
+}
+
+button.primary {
+  background: var(--accent-2);
+  color: #fff;
+  border-color: #204634;
+}
+
+button.danger {
+  background: var(--danger);
+  color: #fff;
+  border-color: #772121;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.status {
+  margin: 0;
+  min-height: 1.5em;
+}
+
+.helpText {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.rollWrap {
+  overflow: auto;
+  padding: 10px;
+}
+
+.rollHeader,
+.roll {
+  min-width: 760px;
+}
+
+.rollHeader {
+  display: grid;
+  grid-template-columns: 70px repeat(var(--steps, 32), minmax(18px, 1fr));
+  margin-bottom: 6px;
+}
+
+.rollHeader .tick {
+  text-align: center;
+  font-size: 0.72rem;
+  color: #5a3f24;
+}
+
+.roll {
+  border: 1px solid var(--grid-line);
+  background: linear-gradient(180deg, var(--paper), #c99a60);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 70px repeat(var(--steps, 32), minmax(18px, 1fr));
+  border-bottom: 1px solid rgba(98, 62, 28, 0.5);
+  min-height: 26px;
+}
+
+.row:last-child {
+  border-bottom: 0;
+}
+
+.pitchLabel {
+  border-right: 1px solid rgba(98, 62, 28, 0.7);
+  text-align: center;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 242, 206, 0.45);
+}
+
+.cell {
+  border-right: 1px dashed rgba(98, 62, 28, 0.45);
+  position: relative;
+}
+
+.cell:nth-child(4n + 2) {
+  border-right-color: rgba(58, 34, 14, 0.9);
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.note {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 1px;
+  cursor: ew-resize;
+  border-radius: 5px;
+  background: repeating-linear-gradient(90deg, #2c1d12 0 5px, #3e2717 5px 10px);
+  box-shadow: inset 0 0 0 1px rgba(255, 229, 177, 0.4);
+}
+
+.note.playing {
+  background: repeating-linear-gradient(90deg, #ff934f 0 5px, #cc5d1d 5px 10px);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .page.active {
+    grid-template-columns: 1fr;
+  }
+
+  .rollHeader,
+  .roll {
+    min-width: 680px;
+  }
+}

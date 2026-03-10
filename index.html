@@ -1,21 +1,98 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#1a1a1a" />
-    <title>Guitarist</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script>
-      const redirect = sessionStorage.redirect;
-      delete sessionStorage.redirect;
-      if (redirect && redirect !== location.pathname + location.search + location.hash) {
-        history.replaceState(null, '', redirect);
-      }
-    </script>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#c46f2b" />
+  <title>MusicBox - 오르골</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg" />
+  <link rel="apple-touch-icon" href="icons/icon-192.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>MusicBox 오르골</h1>
+    <p class="subtitle">오프라인에서도 연주되는 나만의 오르골</p>
+  </header>
+
+  <nav class="tabs" aria-label="페이지 선택">
+    <button class="tab active" data-tab="player">연주</button>
+    <button class="tab" data-tab="editor">편집</button>
+  </nav>
+
+  <main>
+    <section id="player" class="page active" aria-label="곡 연주 페이지">
+      <div class="panel controls">
+        <label>
+          곡 선택
+          <select id="playerSongSelect"></select>
+        </label>
+        <label>
+          속도 (BPM)
+          <input id="tempoInput" type="range" min="40" max="220" value="96" />
+          <span id="tempoValue">96</span>
+        </label>
+        <label>
+          음색
+          <select id="voiceSelect">
+            <option value="musicbox" selected>Music Box</option>
+            <option value="bell">Bell</option>
+            <option value="warm">Warm Pluck</option>
+          </select>
+        </label>
+        <div class="buttonRow">
+          <button id="playBtn" class="primary">재생</button>
+          <button id="stopBtn">정지</button>
+          <button id="loopBtn" aria-pressed="false">반복: 꺼짐</button>
+        </div>
+        <p id="nowPlaying" class="status">대기 중</p>
+      </div>
+
+      <div class="panel songInfo">
+        <h2>곡 정보</h2>
+        <p id="songSummary">곡을 선택하세요.</p>
+      </div>
+    </section>
+
+    <section id="editor" class="page" aria-label="곡 편집 페이지">
+      <div class="panel controls">
+        <label>
+          편집할 곡
+          <select id="editorSongSelect"></select>
+        </label>
+        <div class="buttonRow">
+          <button id="newSongBtn" class="primary">새 곡</button>
+          <button id="renameSongBtn">이름 변경</button>
+          <button id="deleteSongBtn" class="danger">삭제</button>
+        </div>
+
+        <label>
+          새 노트 길이 (박)
+          <input id="noteLengthInput" type="range" min="1" max="8" value="2" />
+          <span id="noteLengthValue">2</span>
+        </label>
+
+        <label>
+          스텝 수 (한 박 = 1스텝)
+          <input id="stepCountInput" type="number" min="8" max="96" step="4" value="32" />
+        </label>
+        <button id="resizeStepsBtn">스텝 수 적용</button>
+
+        <p class="helpText">빈 칸 클릭: 노트 추가, 노트 클릭: 삭제, 노트를 좌우로 드래그: 길이 조절</p>
+      </div>
+
+      <div class="panel rollWrap">
+        <div id="rollHeader" class="rollHeader"></div>
+        <div id="roll" class="roll" aria-label="오르골 펀치 롤 편집기"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>로컬 저장소에 자동 저장됩니다. 앱 종료 후에도 곡이 유지됩니다.</small>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
 </html>

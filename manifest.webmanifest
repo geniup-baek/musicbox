@@ -1,0 +1,24 @@
+{
+  "name": "MusicBox 오르골",
+  "short_name": "MusicBox",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f2e6cc",
+  "theme_color": "#c46f2b",
+  "lang": "ko",
+  "description": "오프라인에서도 작동하는 오르골 작곡/연주 PWA",
+  "icons": [
+    {
+      "src": "icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
