@@ -391,7 +391,6 @@ function renderRoll() {
 
   roll.querySelectorAll(".note").forEach((noteEl) => {
     noteEl.addEventListener("pointerdown", onNotePointerDown);
-    noteEl.addEventListener("dblclick", onNoteDoubleClick);
   });
 }
 
@@ -718,6 +717,8 @@ function onGlobalPointerUp() {
     song.notes = song.notes.map((n) => n.id === dragState.noteId
       ? { ...n, length: dragState.previewLength }
       : n);
+  } else {
+    song.notes = song.notes.filter((n) => n.id !== dragState.noteId);
   }
 
   dragState = null;
@@ -748,13 +749,25 @@ function noteWidthFromLength(length) {
   return `calc(${length} * (100% + 1px) - 2px)`;
 }
 
-function onNoteDoubleClick(e) {
+function onNoteClick(e) {
+  if (dragState) return;
+
   e.stopPropagation();
   const song = getSelectedSong();
   if (!song) return;
 
   const noteId = e.currentTarget.dataset.id;
-  song.notes = song.notes.filter((n) => n.id !== noteId);
+  const mode = e.shiftKey ? "extend" : "delete";
+
+  if (mode === "delete") {
+    song.notes = song.notes.filter((n) => n.id !== noteId);
+  } else {
+    song.notes = song.notes.map((n) => {
+      if (n.id !== noteId) return n;
+      const maxLength = Math.max(1, song.steps - n.start);
+      return { ...n, length: Math.min(maxLength, n.length + 1) };
+    });
+  }
 
   persistSongs();
   renderRoll();
