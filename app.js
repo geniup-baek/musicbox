@@ -823,17 +823,30 @@ function createSong(title) {
   return {
     id: crypto.randomUUID(),
     title,
-    tempo: 96,
-    beatPerStep: 1,
-    sustainStrength: 1,
+    tempo: 120,
+    beatPerStep: 0.25,
+    sustainStrength: 1.33,
     voice: "musicbox",
     steps: DEFAULT_STEPS,
     notes: [
-      { id: crypto.randomUUID(), row: 14, start: 0, length: 4 },
-      { id: crypto.randomUUID(), row: 12, start: 0, length: 4 },
-      { id: crypto.randomUUID(), row: 10, start: 0, length: 4 },
-      { id: crypto.randomUUID(), row: 12, start: 4, length: 2 },
-      { id: crypto.randomUUID(), row: 10, start: 8, length: 2 }
+      {id: crypto.randomUUID(), row: 7, start: 0, length: 2},
+      {id: crypto.randomUUID(), row: 8, start: 2, length: 4},
+      {id: crypto.randomUUID(), row: 10, start: 6, length: 2},
+      {id: crypto.randomUUID(), row: 12, start: 8, length: 2},
+      {id: crypto.randomUUID(), row: 10, start: 10, length: 2},
+      {id: crypto.randomUUID(), row: 9, start: 14, length: 1},
+      {id: crypto.randomUUID(), row: 10, start: 15, length: 1},
+      {id: crypto.randomUUID(), row: 12, start: 16, length: 1},
+      {id: crypto.randomUUID(), row: 13, start: 17, length: 1},
+      {id: crypto.randomUUID(), row: 14, start: 18, length: 4},
+      {id: crypto.randomUUID(), row: 11, start: 22, length: 2},
+      {id: crypto.randomUUID(), row: 12, start: 24, length: 2},
+      {id: crypto.randomUUID(), row: 13, start: 26, length: 2},
+      {id: crypto.randomUUID(), row: 14, start: 28, length: 2},
+      {id: crypto.randomUUID(), row: 13, start: 30, length: 2},
+      {id: crypto.randomUUID(), row: 12, start: 32, length: 2},
+      {id: crypto.randomUUID(), row: 10, start: 34, length: 2},
+      {id: crypto.randomUUID(), row: 10, start: 36, length: 8}
     ]
   };
 }
